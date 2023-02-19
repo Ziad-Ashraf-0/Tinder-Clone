@@ -237,6 +237,8 @@ app.post("/message", async (req, res) => {
     await client.connect();
     const database = client.db("app-data");
     const messages = database.collection("messages");
+    const insertMessage = await messages.insertOne(message);
+    res.send(insertMessage);
   } finally {
     await client.close();
   }

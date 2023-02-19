@@ -22,9 +22,12 @@ const Dashboard = () => {
 
   const getUser = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/user", {
-        params: { userId },
-      });
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}user`,
+        {
+          params: { userId },
+        }
+      );
       setUser(response.data);
     } catch (err) {
       console.error(err);
@@ -33,9 +36,12 @@ const Dashboard = () => {
 
   const getGenderedUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/gendered-users", {
-        params: { gender: user?.gender_interest },
-      });
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}gendered-users`,
+        {
+          params: { gender: user?.gender_interest },
+        }
+      );
       setGenderedUsers(response.data);
     } catch (err) {
       console.error(err);
@@ -58,7 +64,7 @@ const Dashboard = () => {
 
   const updateMatches = async (matchUserId) => {
     try {
-      await axios.put("http://localhost:8000/addmatch", {
+      await axios.put(`${process.env.REACT_APP_SERVER_URL}addmatch`, {
         userId,
         matchUserId,
       });
